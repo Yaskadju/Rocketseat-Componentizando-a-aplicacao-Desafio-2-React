@@ -14,6 +14,8 @@ import "./styles/sidebar.scss"
 import "./styles/content.scss"
 import { Content } from "./components/Content"
 import { SideBar } from "./components/SideBar"
+import { MovieModal } from "./components/MovieModal"
+import Modal from "react-modal"
 
 interface GenreResponseProps {
   id: number
@@ -30,7 +32,10 @@ interface MovieProps {
     Value: string
   }>
   Runtime: string
+  Plot: string
 }
+
+Modal.setAppElement("#root")
 
 export function App() {
   const [selectedGenreId, setSelectedGenreId] = useState(1)
@@ -58,7 +63,11 @@ export function App() {
 
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
-      <SideBar setSelectedGenreId={setSelectedGenreId} selectedGenreId={selectedGenreId} genres={genres} />
+      <SideBar
+        setSelectedGenreId={setSelectedGenreId}
+        selectedGenreId={selectedGenreId}
+        genres={genres}
+      />
       <Content movies={movies} selectedGenre={selectedGenre} />
     </div>
   )

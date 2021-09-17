@@ -1,5 +1,6 @@
-import React, { Component } from "react"
+import React, { Component, useState } from "react"
 import { MovieCard } from "./MovieCard"
+import { MovieModal } from "./MovieModal"
 
 interface ContentProps {
   selectedGenre: { title: string }
@@ -8,7 +9,8 @@ interface ContentProps {
     imdbID: string
     Poster: string
     Runtime: string
-    Ratings: Array<{ Value: string }>
+    Ratings: Array<{ Source: string; Value: string }>
+    Plot: string
   }>
 }
 
@@ -23,7 +25,14 @@ export function Content({ movies, selectedGenre }: ContentProps) {
       <main>
         <div className="movies-list">
           {movies.map(movie => (
-            <MovieCard key={movie.imdbID} title={movie.Title} poster={movie.Poster} runtime={movie.Runtime} rating={movie.Ratings[0].Value} />
+            <MovieCard
+              key={movie.imdbID}
+              title={movie.Title}
+              poster={movie.Poster}
+              runtime={movie.Runtime}
+              rating={movie.Ratings}
+              plot={movie.Plot}
+            />
           ))}
         </div>
       </main>
